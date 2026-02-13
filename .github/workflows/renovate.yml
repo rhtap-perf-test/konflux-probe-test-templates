@@ -22,7 +22,7 @@ jobs:
         run: |
           pipx install git+https://github.com/konflux-ci/pipeline-migration-tool.git
           # Verify it runs
-          pipeline-migration-tool --version || echo "Tool installed"
+          pipeline-migration-tool --help
 
       # Run Renovate using NPM
       - name: Renovate
