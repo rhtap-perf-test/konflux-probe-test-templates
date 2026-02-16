@@ -41,6 +41,6 @@ jobs:
           
           RENOVATE_ALLOW_SHELL_EXECUTOR_FOR_POST_UPGRADE_COMMANDS: 'true'
           # Allow the tool (matches the command 'pipeline-migration-tool')
-          RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: '["^pipeline-migration-tool.*"]'
+          RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: '["^pipeline-migration-tool migrate -f \"\\$RENOVATE_POST_UPGRADE_COMMAND_DATA_FILE\"$"]'
           
           LOG_LEVEL: debug
