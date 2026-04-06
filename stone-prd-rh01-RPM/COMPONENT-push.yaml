@@ -29,6 +29,11 @@ spec:
       value: "{{ target_branch }}"
     - name: ociStorage
       value: "quay.io/redhat-user-workloads/$(context.taskRun.namespace)/COMPONENT:$(params.revision)"
+    - name: build-platforms
+      value:
+        - localhost
+        - linux/amd64
+        - linux/arm64
     - name: build-architectures
       value:
         - aarch64
