@@ -338,12 +338,12 @@ spec:
 
             # Transfer Docker auth config for registry push access
             if [ -f "$HOME/.docker/config.json" ]; then
-              ssh $SSH_ARGS "$SSH_HOST" "cmd /c if not exist .docker mkdir .docker"
+              ssh -vvv $SSH_ARGS "$SSH_HOST" "cmd /c if not exist .docker mkdir .docker"
               scp $SSH_ARGS "$HOME/.docker/config.json" "$SSH_HOST:.docker/config.json"
             fi
 
             # Prepare remote build directory
-            ssh $SSH_ARGS "$SSH_HOST" "cmd /c if exist build rmdir /s /q build"
+            ssh -vvv $SSH_ARGS "$SSH_HOST" "cmd /c if exist build rmdir /s /q build"
             ssh $SSH_ARGS "$SSH_HOST" "cmd /c mkdir build"
 
             # Archive and transfer source to remote host
