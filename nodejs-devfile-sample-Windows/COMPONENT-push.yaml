@@ -323,6 +323,16 @@ spec:
             fi
             chmod 0400 ~/.ssh/id_rsa
 
+
+            echo "USER=$(whoami)"
+            echo "HOME=$HOME"
+
+            ls -la /root/.ssh || true
+            ls -la ~/.ssh || true
+
+            stat /root/.ssh/id_rsa || true
+            stat ~/.ssh/id_rsa || true
+
             IMAGE="$(params.IMAGE)"
             if [ "$(params.IMAGE_APPEND_PLATFORM)" == "true" ]; then
               PLATFORM="$(params.PLATFORM)"
