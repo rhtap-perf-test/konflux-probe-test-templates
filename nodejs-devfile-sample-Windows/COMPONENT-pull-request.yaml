@@ -33,7 +33,7 @@ spec:
     value:
     - windows-4xlarge/amd64
   - name: dockerfile
-    value: /Dockerfile
+    value: Dockerfile
   - name: build-source-image
     value: "true"
   - name: hermetic
