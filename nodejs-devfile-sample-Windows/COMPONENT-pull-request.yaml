@@ -39,7 +39,7 @@ spec:
   - name: hermetic
     value: "false"
   - name: prefetch-input
-    value: '{"type": "npm", "path": "."}'
+    value: ''
   pipelineSpec:
     description: |
       This pipeline is ideal for building multi-arch container images from a Containerfile while maintaining trust after pipeline customization.
@@ -336,10 +336,25 @@ spec:
               IMAGE="${IMAGE}-windows-${ARCH}"
             fi
 
-            # Transfer Docker auth config for registry push access
+            # Authenticate Docker on the remote Windows host for registry push.
+            # We do an explicit "docker login" rather than just copying config.json,
+            # because Docker CE on Windows may not resolve path-based auth entries
+            # (e.g. "quay.io/org/repo") that Tekton generates in config.json.
+            REGISTRY="${IMAGE%%/*}"
             if [ -f "$HOME/.docker/config.json" ]; then
-              ssh $SSH_ARGS "$SSH_HOST" "cmd /c if not exist .docker mkdir .docker"
-              scp $SSH_ARGS "$HOME/.docker/config.json" "$SSH_HOST:.docker/config.json"
+              AUTH_B64=$(jq -r --arg reg "$REGISTRY" \
+                '[.auths | to_entries[] | select(.key | startswith($reg)) | .value.auth] | last // empty' \
+                "$HOME/.docker/config.json" 2>/dev/null)
+              if [ -n "$AUTH_B64" ]; then
+                DOCKER_USER=$(echo "$AUTH_B64" | base64 -d | cut -d: -f1)
+                DOCKER_PASS=$(echo "$AUTH_B64" | base64 -d | cut -d: -f2-)
+                echo "Logging into $REGISTRY on remote host..."
+                echo "$DOCKER_PASS" | ssh $SSH_ARGS "$SSH_HOST" "docker login -u $DOCKER_USER --password-stdin $REGISTRY"
+              else
+                echo "WARNING: No auth found for $REGISTRY in config.json"
+              fi
+            else
+              echo "WARNING: No Docker config found at $HOME/.docker/config.json"
             fi
 
             # Prepare remote build directory
