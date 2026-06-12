@@ -20,7 +20,7 @@ metadata:
 spec:
   params:
     - name: package-name
-      value: konflux-probe-libecpg
+      value: libecpg
     - name: git-url
       value: "{{ source_url }}"
     - name: revision
