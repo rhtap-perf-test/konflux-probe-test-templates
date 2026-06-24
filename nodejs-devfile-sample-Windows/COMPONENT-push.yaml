@@ -295,7 +295,7 @@ spec:
           emptyDir: {}
         steps:
         - name: use-trusted-artifact
-          image: quay.io/konflux-ci/build-trusted-artifacts:latest@sha256:83e9875f45cefd335641973a74db8bb4987cc98e47024aa4822eafd4150c315d
+          image: quay.io/konflux-ci/build-trusted-artifacts:latest@sha256:0c2e27a647b91fd6bcfbe0fab023544fd348737baa3184291e6d75b5cd116b27
           volumeMounts:
           - name: workdir
             mountPath: /var/workdir
