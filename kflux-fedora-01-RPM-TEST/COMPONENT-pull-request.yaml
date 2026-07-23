@@ -40,13 +40,17 @@ spec:
         - x86_64
     - name: strictArch
       value: "false"
+    - name: self-ref-url
+      value: "https://gitlab.com/fedora/infrastructure/konflux/rpmbuild-pipeline"
+    - name: self-ref-revision
+      value: "c8a0bf7f6605239e7e2b3d8832c2627421ce0703"
   pipelineRef:
     resolver: git
     params:
       - name: url
         value: https://gitlab.com/fedora/infrastructure/konflux/rpmbuild-pipeline
       - name: revision
-        value: "main"
+        value: "c8a0bf7f6605239e7e2b3d8832c2627421ce0703"
       - name: pathInRepo
         value: pipeline/build-rpm-package.yaml
   taskRunTemplate:
