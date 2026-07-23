@@ -34,13 +34,17 @@ spec:
       value: "{{ target_branch }}"
     - name: ociStorage
       value: "quay.io/redhat-user-workloads/$(context.taskRun.namespace)/COMPONENT:$(params.revision)"
+    - name: self-ref-url
+      value: "https://gitlab.cee.redhat.com/rhel-on-konflux/rpmbuild-pipeline"
+    - name: self-ref-revision
+      value: 137f546f0acd1bc36023737b6dfbd266f923c529
   pipelineRef:
     resolver: git
     params:
       - name: url
         value: https://gitlab.cee.redhat.com/rhel-on-konflux/rpmbuild-pipeline
       - name: revision
-        value: main
+        value: 137f546f0acd1bc36023737b6dfbd266f923c529
       - name: pathInRepo
         value: pipeline/build-rpm-package.yaml
   taskRunTemplate:
