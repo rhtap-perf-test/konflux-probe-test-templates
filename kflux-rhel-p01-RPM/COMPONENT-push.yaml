@@ -41,7 +41,7 @@ spec:
       - name: revision
         value: main
       - name: pathInRepo
-        value: pipeline/build-rhel-package.yaml
+        value: pipeline/build-rpm-package.yaml
   taskRunTemplate:
     serviceAccountName: build-pipeline-COMPONENT
   workspaces:
