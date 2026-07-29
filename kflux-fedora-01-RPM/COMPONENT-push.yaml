@@ -24,7 +24,7 @@ spec:
     - name: git-url
       value: "{{ source_url }}"
     - name: revision
-      value: c8a0bf7f6605239e7e2b3d8832c2627421ce0703
+      value: "{{ revision }}"
     - name: target-branch
       value: "{{ target_branch }}"
     - name: ociStorage
@@ -43,14 +43,14 @@ spec:
     - name: self-ref-url
       value: "https://gitlab.com/fedora/infrastructure/konflux/rpmbuild-pipeline"
     - name: self-ref-revision
-      value: c8a0bf7f6605239e7e2b3d8832c2627421ce0703
+      value: "main"
   pipelineRef:
     resolver: git
     params:
       - name: url
         value: https://gitlab.com/fedora/infrastructure/konflux/rpmbuild-pipeline
       - name: revision
-        value: c8a0bf7f6605239e7e2b3d8832c2627421ce0703
+        value: "main"
       - name: pathInRepo
         value: pipeline/build-rpm-package.yaml
   taskRunTemplate:

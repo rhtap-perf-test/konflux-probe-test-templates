@@ -24,7 +24,7 @@ spec:
     - name: git-url
       value: "{{ source_url }}"
     - name: revision
-      value: 47149d31753c0bf46cc9fe5dc50af3716aeea63c
+      value: "{{ revision }}"
     - name: target-branch
       value: "{{ target_branch }}"
     - name: ociStorage
@@ -43,14 +43,14 @@ spec:
     - name: self-ref-url
       value: "https://github.com/konflux-ci/rpmbuild-pipeline.git"
     - name: self-ref-revision
-      value: 47149d31753c0bf46cc9fe5dc50af3716aeea63c
+      value: "main"
   pipelineRef:
     resolver: git
     params:
       - name: url
         value: https://github.com/konflux-ci/rpmbuild-pipeline.git
       - name: revision
-        value: 47149d31753c0bf46cc9fe5dc50af3716aeea63c
+        value: "main"
       - name: pathInRepo
         value: pipeline/build-rpm-package.yaml
   taskRunTemplate:

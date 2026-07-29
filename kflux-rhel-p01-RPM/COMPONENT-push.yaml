@@ -28,7 +28,7 @@ spec:
     - name: git-url
       value: "{{ source_url }}"
     - name: revision
-      value: 501161ea2a5824f8e9e33f90e990ce7cc5595b96
+      value: "{{ revision }}"
     - name: target-branch
       value: "{{ target_branch }}"
     - name: ociStorage
@@ -36,14 +36,14 @@ spec:
     - name: self-ref-url
       value: "https://gitlab.cee.redhat.com/rhel-on-konflux/rpmbuild-pipeline"
     - name: self-ref-revision
-      value: 501161ea2a5824f8e9e33f90e990ce7cc5595b96
+      value: main
   pipelineRef:
     resolver: git
     params:
       - name: url
         value: https://gitlab.cee.redhat.com/rhel-on-konflux/rpmbuild-pipeline
       - name: revision
-        value: 501161ea2a5824f8e9e33f90e990ce7cc5595b96
+        value: main
       - name: pathInRepo
         value: pipeline/build-rpm-package.yaml
   taskRunTemplate:
