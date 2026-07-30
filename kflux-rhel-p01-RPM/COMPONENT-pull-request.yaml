@@ -44,7 +44,7 @@ spec:
       - name: url
         value: https://gitlab.cee.redhat.com/rhel-on-konflux/rpmbuild-pipeline
       - name: revision
-        value: main
+        value: 501161ea2a5824f8e9e33f90e990ce7cc5595b96
       - name: pathInRepo
         value: pipeline/build-rpm-package.yaml
   taskRunTemplate:
