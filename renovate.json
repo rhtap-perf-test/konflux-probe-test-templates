@@ -24,6 +24,7 @@
           "/^quay.io/konflux-ci/konflux-vanguard//",
           "/^quay.io/redhat-appstudio-tekton-catalog//"
         ],
+        "versioning": "loose",
         "enabled": true,
         "groupName": "Konflux task references (test migration)",
         "branchPrefix": "konflux/tasks-test/",
