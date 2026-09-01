@@ -1,0 +1,170 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  annotations:
+    kueue.konflux-ci.dev/requests-localhost: "true"
+    build.appstudio.openshift.io/repo: REPOURL?rev={{revision}}
+    build.appstudio.redhat.com/commit_sha: '{{revision}}'
+    build.appstudio.redhat.com/pull_request_number: '{{pull_request_number}}'
+    build.appstudio.redhat.com/target_branch: '{{target_branch}}'
+    pipelinesascode.tekton.dev/cancel-in-progress: "true"
+    pipelinesascode.tekton.dev/max-keep-runs: "3"
+    pipelinesascode.tekton.dev/on-cel-expression: event == "pull_request" && target_branch
+      == "main"
+  creationTimestamp: null
+  labels:
+    appstudio.openshift.io/application: APPLICATION
+    appstudio.openshift.io/component: COMPONENT
+    pipelines.appstudio.openshift.io/type: build
+  name: COMPONENT-on-pull-request
+  namespace: NAMESPACE
+spec:
+  timeouts:
+    pipeline: "1h"
+  params:
+  - name: PACKAGE
+    value: ntplib
+  - name: VERSION
+    value: 0.4.0
+  - name: LIGHTWELL_BUILDS_REPO_URL
+    value: https://github.com/rhtap-perf-test/lw-pypi.org-ntplib-1
+  - name: LIGHTWELL_BUILDS_TAG
+    value: ntplib/0.4.0
+  - name: IMAGE
+    value: quay.io/rhtap-perf-test/perf-release-service-trusted-artifacts-stage:ntplib-COMPONENT-on-pr-{{revision}}
+  - name: ociStorage
+    value: quay.io/rhtap-perf-test/perf-release-service-trusted-artifacts-stage:ntplib-COMPONENT-on-pr-{{revision}}-ta
+  - name: ociArtifactExpiresAfter
+    value: "5d"
+  - name: IMAGE_EXPIRES_AFTER
+    value: "5d"
+  pipelineSpec:
+    description: |
+      Build CVE-remediated Python wheels from a lightwell-builds git repository.
+      Pipeline flow from konflux-lightwell/lightwell-konflux-orchestrator
+      tekton/pipelines/python-remediated-build/python-remediated-build.yaml.
+      ClamAV scan omitted for perf probe (build-only).
+    params:
+    - name: PACKAGE
+      type: string
+    - name: VERSION
+      type: string
+    - name: LIGHTWELL_BUILDS_REPO_URL
+      type: string
+    - name: LIGHTWELL_BUILDS_TAG
+      type: string
+    - name: IMAGE
+      type: string
+    - name: ociStorage
+      type: string
+    - name: ociArtifactExpiresAfter
+      type: string
+      default: ""
+    - name: IMAGE_EXPIRES_AFTER
+      type: string
+      default: ""
+    - name: WHEEL_SERVER_URL
+      type: string
+      default: ""
+    - name: caTrustConfigMapName
+      type: string
+      default: trusted-ca
+    - name: caTrustConfigMapKey
+      type: string
+      default: ca-bundle.crt
+    results:
+    - name: IMAGE_URL
+      value: $(tasks.fromager-build-wheels.results.IMAGE_URL)
+    - name: IMAGE_DIGEST
+      value: $(tasks.fromager-build-wheels.results.IMAGE_DIGEST)
+    - name: IMAGE_REF
+      value: $(tasks.fromager-build-wheels.results.IMAGE_REF)
+    - name: CHAINS-GIT_URL
+      value: $(tasks.clone-lightwell-builds.results.url)
+    - name: CHAINS-GIT_COMMIT
+      value: $(tasks.clone-lightwell-builds.results.commit)
+    tasks:
+    - name: clone-lightwell-builds
+      params:
+      - name: url
+        value: $(params.LIGHTWELL_BUILDS_REPO_URL)
+      - name: revision
+        value: $(params.LIGHTWELL_BUILDS_TAG)
+      - name: ociStorage
+        value: $(params.ociStorage)
+      - name: ociArtifactExpiresAfter
+        value: $(params.ociArtifactExpiresAfter)
+      - name: caTrustConfigMapName
+        value: $(params.caTrustConfigMapName)
+      - name: caTrustConfigMapKey
+        value: $(params.caTrustConfigMapKey)
+      taskRef:
+        resolver: bundles
+        params:
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-git-clone-oci-ta:0.1@sha256:d30f13dd15daf89dd6dc645243b3444d35570d13f7840c3fd65e366022515205
+        - name: name
+          value: git-clone-oci-ta
+        - name: kind
+          value: task
+    - name: source-to-sdist
+      runAfter:
+      - clone-lightwell-builds
+      params:
+      - name: SOURCE_ARTIFACT
+        value: $(tasks.clone-lightwell-builds.results.SOURCE_ARTIFACT)
+      - name: PACKAGE
+        value: $(params.PACKAGE)
+      - name: VERSION
+        value: $(params.VERSION)
+      - name: LIGHTWELL_BUILDS_TAG
+        value: $(params.LIGHTWELL_BUILDS_TAG)
+      - name: ociStorage
+        value: $(params.ociStorage)
+      - name: ociArtifactExpiresAfter
+        value: $(params.ociArtifactExpiresAfter)
+      - name: caTrustConfigMapName
+        value: $(params.caTrustConfigMapName)
+      - name: caTrustConfigMapKey
+        value: $(params.caTrustConfigMapKey)
+      taskRef:
+        resolver: bundles
+        params:
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-source-to-sdist:0.1@sha256:67ab78a7cf18c7305f284d2640ca5d204b9ce1be892cc97fef122dfc84458337
+        - name: name
+          value: source-to-sdist
+        - name: kind
+          value: task
+    - name: fromager-build-wheels
+      runAfter:
+      - source-to-sdist
+      params:
+      - name: SDISTS_ARTIFACT
+        value: $(tasks.source-to-sdist.results.SDISTS_ARTIFACT)
+      - name: PACKAGE
+        value: $(params.PACKAGE)
+      - name: VERSION
+        value: $(params.VERSION)
+      - name: IMAGE
+        value: $(params.IMAGE)
+      - name: IMAGE_EXPIRES_AFTER
+        value: $(params.IMAGE_EXPIRES_AFTER)
+      - name: WHEEL_SERVER_URL
+        value: $(params.WHEEL_SERVER_URL)
+      - name: caTrustConfigMapName
+        value: $(params.caTrustConfigMapName)
+      - name: caTrustConfigMapKey
+        value: $(params.caTrustConfigMapKey)
+      taskRef:
+        resolver: bundles
+        params:
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-fromager-build-wheels:0.1@sha256:32dc851c581b56391de78178ee2578497b43714e80a30dcb24f9d8cc8d37404a
+        - name: name
+          value: fromager-build-wheels
+        - name: kind
+          value: task
+  taskRunTemplate:
+    serviceAccountName: build-pipeline-COMPONENT
+status: {}
