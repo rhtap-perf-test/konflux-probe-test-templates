@@ -102,7 +102,7 @@ spec:
         resolver: bundles
         params:
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-git-clone-oci-ta:0.1@sha256:d30f13dd15daf89dd6dc645243b3444d35570d13f7840c3fd65e366022515205
+          value: quay.io/konflux-ci/tekton-catalog/task-git-clone-oci-ta:0.2.6@sha256:fbd392bffc0bb04f639e0c0044f36ce7f9f4a283add5bea69a127b80608cad0c
         - name: name
           value: git-clone-oci-ta
         - name: kind
@@ -160,7 +160,7 @@ spec:
         resolver: bundles
         params:
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-fromager-build-wheels:0.1@sha256:32dc851c581b56391de78178ee2578497b43714e80a30dcb24f9d8cc8d37404a
+          value: quay.io/konflux-ci/tekton-catalog/task-fromager-build-wheels:0.1@sha256:189813fce2de8c410d76de673f812692555c303738b2eda4d0282de19b69d68d
         - name: name
           value: fromager-build-wheels
         - name: kind
