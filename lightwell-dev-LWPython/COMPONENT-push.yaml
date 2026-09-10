@@ -169,5 +169,5 @@ spec:
         - name: kind
           value: task
   taskRunTemplate:
-    serviceAccountName: build-pipeline-COMPONENT
+    serviceAccountName: builder
 status: {}
