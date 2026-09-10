@@ -97,6 +97,10 @@ spec:
         value: $(params.caTrustConfigMapName)
       - name: caTrustConfigMapKey
         value: $(params.caTrustConfigMapKey)
+      - name: depth
+        value: "0"
+      - name: fetchTags
+        value: "true"
       taskRef:
         resolver: bundles
         params:
