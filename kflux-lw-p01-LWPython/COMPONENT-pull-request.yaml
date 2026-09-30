@@ -32,6 +32,11 @@ spec:
   - name: FIX_TYPE
     # source-to-sdist: must be Backport or Novel (ADR-0020 B/N calculation).
     value: Novel
+  - name: BUILD_CONFIGS_REPO_URL
+    # source-to-sdist resolve-version-overrides (calunga defaults from orchestrator).
+    value: https://gitlab.cee.redhat.com/lightwell/lightwell-builds/build-configs/calunga-python
+  - name: BUILD_CONFIGS_REVISION
+    value: main
   - name: IMAGE
     value: quay.io/rhtap-perf-test/perf-release-service-trusted-artifacts-stage:ntplib-COMPONENT-on-pr-{{revision}}
   - name: ociStorage
@@ -58,6 +63,12 @@ spec:
     - name: FIX_TYPE
       type: string
       default: Novel
+    - name: BUILD_CONFIGS_REPO_URL
+      type: string
+      default: https://gitlab.cee.redhat.com/lightwell/lightwell-builds/build-configs/calunga-python
+    - name: BUILD_CONFIGS_REVISION
+      type: string
+      default: main
     - name: IMAGE
       type: string
     - name: ociStorage
@@ -130,6 +141,10 @@ spec:
         value: $(params.LIGHTWELL_BUILDS_TAG)
       - name: FIX_TYPE
         value: $(params.FIX_TYPE)
+      - name: BUILD_CONFIGS_REPO_URL
+        value: $(params.BUILD_CONFIGS_REPO_URL)
+      - name: BUILD_CONFIGS_REVISION
+        value: $(params.BUILD_CONFIGS_REVISION)
       - name: ociStorage
         value: $(params.ociStorage)
       - name: ociArtifactExpiresAfter
