@@ -165,7 +165,7 @@ spec:
         - name: bundle
           value: quay.io/konflux-ci/tekton-catalog/task-fromager-build-wheels:0.1@sha256:02b0ceec3bf3de8f5474f60f4663688517d9a767233dc01fdfaa5f19d2d6cf04
         - name: name
-          value: fromager-build-wheels
+          value: python-fromager-build-wheels
         - name: kind
           value: task
   taskRunTemplate:
