@@ -153,6 +153,9 @@ spec:
         value: $(params.caTrustConfigMapName)
       - name: caTrustConfigMapKey
         value: $(params.caTrustConfigMapKey)
+      workspaces:
+      - name: git-auth
+        workspace: git-auth
       taskRef:
         resolver: bundles
         params:
@@ -193,6 +196,13 @@ spec:
           value: python-fromager-build-wheels
         - name: kind
           value: task
+    workspaces:
+    - name: git-auth
+      optional: true
   taskRunTemplate:
     serviceAccountName: builder
+  workspaces:
+  - name: git-auth
+    secret:
+      secretName: '{{ git_auth_secret }}'
 status: {}
