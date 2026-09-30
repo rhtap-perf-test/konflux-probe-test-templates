@@ -25,7 +25,7 @@ spec:
   - name: VERSION
     value: 0.4.0
   - name: LIGHTWELL_BUILDS_REPO_URL
-    value: https://gitlab.cee.redhat.com/tdesu/lw-pypi.org-ntplib-1
+    value: https://gitlab.cee.redhat.com/jhutar/lw-pypi.org-ntplib-1
   - name: LIGHTWELL_BUILDS_TAG
     value: ntplib/0.4.0
   - name: IMAGE
