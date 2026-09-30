@@ -198,7 +198,6 @@ spec:
           value: task
     workspaces:
     - name: git-auth
-      optional: true
   taskRunTemplate:
     serviceAccountName: builder
   workspaces:
