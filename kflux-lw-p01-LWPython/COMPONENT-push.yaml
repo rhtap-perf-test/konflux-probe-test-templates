@@ -38,9 +38,9 @@ spec:
     value: main
   - name: IMAGE
     # Push to rhtap-perf-test org; robot account only has write access there.
-    value: quay.io/rhtap-perf-test/perf-release-service-trusted-artifacts-stage:ntplib-COMPONENT-{{revision}}
+    value: quay.io/rhtap-perf-test/perf-release-service-trusted-artifacts:ntplib-COMPONENT-{{revision}}
   - name: ociStorage
-    value: quay.io/rhtap-perf-test/perf-release-service-trusted-artifacts-stage:ntplib-COMPONENT-{{revision}}-ta
+    value: quay.io/rhtap-perf-test/perf-release-service-trusted-artifacts:ntplib-COMPONENT-{{revision}}-ta
   - name: ociArtifactExpiresAfter
     value: "7d"
   - name: IMAGE_EXPIRES_AFTER
