@@ -108,7 +108,7 @@ spec:
       - name: revision
         value: $(params.LIGHTWELL_BUILDS_TAG)
       - name: ociStorage
-        value: $(params.ociStorage)
+        value: $(params.ociStorage).git
       - name: ociArtifactExpiresAfter
         value: $(params.ociArtifactExpiresAfter)
       - name: caTrustConfigMapName
@@ -147,7 +147,7 @@ spec:
       - name: BUILD_CONFIGS_REVISION
         value: $(params.BUILD_CONFIGS_REVISION)
       - name: ociStorage
-        value: $(params.ociStorage)
+        value: $(params.ociStorage).sdist
       - name: ociArtifactExpiresAfter
         value: $(params.ociArtifactExpiresAfter)
       - name: caTrustConfigMapName
