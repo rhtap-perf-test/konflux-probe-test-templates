@@ -41,7 +41,7 @@ spec:
     # Component ImageRepository path (same pattern as other Konflux probes).
     value: quay.io/QUAY_REPO/NAMESPACE/COMPONENT:on-pr-{{revision}}
   - name: ociStorage
-    value: quay.io/QUAY_REPO/NAMESPACE/COMPONENT:on-pr-{{revision}}-ta
+    value: quay.io/QUAY_REPO/NAMESPACE/COMPONENT:on-pr-{{revision}}
   - name: ociArtifactExpiresAfter
     value: "5d"
   - name: IMAGE_EXPIRES_AFTER
