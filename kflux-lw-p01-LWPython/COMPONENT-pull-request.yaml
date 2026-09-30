@@ -38,9 +38,9 @@ spec:
   - name: BUILD_CONFIGS_REVISION
     value: main
   - name: IMAGE
-    value: quay.io/rhtap-perf-test/perf-release-service-trusted-artifacts-stage:ntplib-COMPONENT-on-pr-{{revision}}
+    value: quay.io/rhtap-perf-test/perf-release-service-trusted-artifacts:ntplib-COMPONENT-on-pr-{{revision}}
   - name: ociStorage
-    value: quay.io/rhtap-perf-test/perf-release-service-trusted-artifacts-stage:ntplib-COMPONENT-on-pr-{{revision}}-ta
+    value: quay.io/rhtap-perf-test/perf-release-service-trusted-artifacts:ntplib-COMPONENT-on-pr-{{revision}}-ta
   - name: ociArtifactExpiresAfter
     value: "5d"
   - name: IMAGE_EXPIRES_AFTER
