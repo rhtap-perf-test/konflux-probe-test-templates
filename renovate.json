@@ -56,6 +56,16 @@
             "**/*.yml"
           ]
         }
+      },
+      {
+        "description": "KONFLUX-16056: keep community templates on clair-scan; ACS/roxctl-scan is unsupported on community/external clusters (clair 0.4.1+ migrates to roxctl)",
+        "matchPaths": [
+          "**/*community/**"
+        ],
+        "matchPackageNames": [
+          "quay.io/konflux-ci/tekton-catalog/task-clair-scan"
+        ],
+        "allowedVersions": "<0.4.1"
       }
     ]
   },
