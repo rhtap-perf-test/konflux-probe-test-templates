@@ -199,7 +199,7 @@ spec:
     workspaces:
     - name: git-auth
   taskRunTemplate:
-    serviceAccountName: builder
+    serviceAccountName: build-pipeline-COMPONENT
   workspaces:
   - name: git-auth
     secret:
