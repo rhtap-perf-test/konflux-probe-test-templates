@@ -34,7 +34,7 @@ spec:
     value: Novel
   - name: BUILD_CONFIGS_REPO_URL
     # Probe-only mirror (shareable scripts + packages/ntplib.json); not calunga-python.
-    value: https://gitlab.cee.redhat.com/tdesu/probe-build-configs-python
+    value: https://gitlab.cee.redhat.com/redhat-performance/lightwell/calunga-python-build-configs
   - name: BUILD_CONFIGS_REVISION
     value: main
   - name: IMAGE
@@ -66,7 +66,7 @@ spec:
       default: Novel
     - name: BUILD_CONFIGS_REPO_URL
       type: string
-      default: https://gitlab.cee.redhat.com/tdesu/probe-build-configs-python
+      default: https://gitlab.cee.redhat.com/redhat-performance/lightwell/calunga-python-build-configs
     - name: BUILD_CONFIGS_REVISION
       type: string
       default: main
@@ -204,6 +204,6 @@ spec:
   workspaces:
   - name: git-auth
     secret:
-      # username/password PAT for tdesu/probe-build-configs-python (not PaC git-auth shape).
+      # username/password PAT for calunga-python-build-configs (not PaC git-auth shape).
       secretName: probe-build-configs-git-auth
 status: {}
