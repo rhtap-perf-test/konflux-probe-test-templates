@@ -33,8 +33,8 @@ spec:
     # source-to-sdist: must be Backport or Novel (ADR-0020 B/N calculation).
     value: Novel
   - name: BUILD_CONFIGS_REPO_URL
-    # source-to-sdist resolve-version-overrides (calunga defaults from orchestrator).
-    value: https://gitlab.cee.redhat.com/lightwell/lightwell-builds/build-configs/calunga-python
+    # Probe-only mirror (shareable scripts + packages/ntplib.json); not calunga-python.
+    value: https://gitlab.cee.redhat.com/redhat-performance/lightwell/calunga-python-build-configs
   - name: BUILD_CONFIGS_REVISION
     value: main
   - name: IMAGE
@@ -66,7 +66,7 @@ spec:
       default: Novel
     - name: BUILD_CONFIGS_REPO_URL
       type: string
-      default: https://gitlab.cee.redhat.com/lightwell/lightwell-builds/build-configs/calunga-python
+      default: https://gitlab.cee.redhat.com/redhat-performance/lightwell/calunga-python-build-configs
     - name: BUILD_CONFIGS_REVISION
       type: string
       default: main
@@ -204,5 +204,6 @@ spec:
   workspaces:
   - name: git-auth
     secret:
-      secretName: '{{ git_auth_secret }}'
+      # username/password PAT for calunga-python-build-configs (not PaC git-auth shape).
+      secretName: probe-build-configs-git-auth
 status: {}
