@@ -39,14 +39,14 @@ spec:
     - name: self-ref-url
       value: "https://gitlab.cee.redhat.com/rhel-on-konflux/rpmbuild-pipeline"
     - name: self-ref-revision
-      value: 4a89b56c2587cd5e4921b692b06bb390c12338ce
+      value: a82af0cbebe0eeaa5010b38a917e253703ecbee1
   pipelineRef:
     resolver: git
     params:
       - name: url
         value: https://gitlab.cee.redhat.com/rhel-on-konflux/rpmbuild-pipeline
       - name: revision
-        value: 4a89b56c2587cd5e4921b692b06bb390c12338ce
+        value: a82af0cbebe0eeaa5010b38a917e253703ecbee1
       - name: pathInRepo
         value: pipeline/build-rpm-package.yaml
   taskRunTemplate:
