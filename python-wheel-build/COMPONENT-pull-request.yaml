@@ -143,7 +143,7 @@ spec:
           - /var/workdir/artifact
         # Step from plumbing tasks/build-python-wheels-oci-ta.yaml (step 4: create-oci-artifact)
         - name: create-oci-artifact
-          image: quay.io/konflux-ci/oras:latest@sha256:1cc659b4d30536ec98300ac551739ef36dee345a7dcfe06129fd78abdc3688ac
+          image: quay.io/konflux-ci/oras:latest@sha256:308df510e55d560fe60efc9133bd09f67a72fbeea54900f3d711f8e27fcc624f
           workingDir: /var/workdir
           env:
           - name: IMAGE
