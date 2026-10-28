@@ -29,7 +29,7 @@ spec:
   - name: LIGHTWELL_BUILDS_TAG
     value: ntplib/0.4.0
   - name: BUILD_TYPE
-    # source-to-sdist BUILD_TYPE: Backport | Novel | Validated (ADR-0020 B/N).
+    # Passed to source-to-sdist + fromager-build-wheels (Backport | Novel | Validated).
     value: Novel
   - name: BUILD_CONFIGS_REPO_URL
     # Probe-only mirror (shareable scripts + packages/ntplib.json); not calunga-python.
@@ -177,6 +177,8 @@ spec:
         value: $(params.VERSION)
       - name: COMPUTED_VERSION
         value: $(tasks.source-to-sdist.results.COMPUTED_VERSION)
+      - name: BUILD_TYPE
+        value: $(params.BUILD_TYPE)
       - name: IMAGE
         value: $(params.IMAGE)
       - name: IMAGE_EXPIRES_AFTER
