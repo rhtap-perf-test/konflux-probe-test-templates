@@ -3,7 +3,7 @@ apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
   annotations:
-    kueue.konflux-ci.dev/requests-localhost: "true"
+    kueue.konflux-ci.dev/requests-localhost: "1"
     build.appstudio.openshift.io/repo: '{{ source_url }}/-/tree/{{ revision }}'
     build.appstudio.redhat.com/commit_sha: '{{ revision }}'
     build.appstudio.redhat.com/target_branch: '{{ target_branch }}'
