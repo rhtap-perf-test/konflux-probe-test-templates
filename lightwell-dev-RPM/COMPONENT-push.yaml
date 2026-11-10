@@ -8,7 +8,8 @@ metadata:
     build.appstudio.redhat.com/commit_sha: '{{ revision }}'
     build.appstudio.redhat.com/target_branch: '{{ target_branch }}'
     pipelinesascode.tekton.dev/max-keep-runs: "3"
-    pipelinesascode.tekton.dev/on-cel-expression: event == "push"
+    pipelinesascode.tekton.dev/on-cel-expression: event == "push" && target_branch
+      == "main"
   creationTimestamp: null
   labels:
     appstudio.openshift.io/application: APPLICATION
@@ -33,16 +34,16 @@ spec:
     - name: ociStorage
       value: "quay.io/redhat-user-workloads-stage/$(context.taskRun.namespace)/COMPONENT:$(params.revision)"
     - name: self-ref-url
-      value: "https://gitlab.cee.redhat.com/rhel-on-konflux/rpmbuild-pipeline"
+      value: "https://github.com/konflux-ci/rpmbuild-pipeline.git"
     - name: self-ref-revision
-      value: 501161ea2a5824f8e9e33f90e990ce7cc5595b96
+      value: 47149d31753c0bf46cc9fe5dc50af3716aeea63c
   pipelineRef:
     resolver: git
     params:
       - name: url
-        value: https://gitlab.cee.redhat.com/rhel-on-konflux/rpmbuild-pipeline
+        value: https://github.com/konflux-ci/rpmbuild-pipeline.git
       - name: revision
-        value: main
+        value: "main"
       - name: pathInRepo
         value: pipeline/build-rpm-package.yaml
   taskRunTemplate:
