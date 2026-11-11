@@ -184,6 +184,10 @@ spec:
         value: $(params.IMAGE)
       - name: IMAGE_EXPIRES_AFTER
         value: $(params.IMAGE_EXPIRES_AFTER)
+      - name: ociStorage
+        value: $(params.ociStorage)
+      - name: ociArtifactExpiresAfter
+        value: $(params.ociArtifactExpiresAfter)
       - name: WHEEL_SERVER_URL
         value: $(params.WHEEL_SERVER_URL)
       - name: caTrustConfigMapName
