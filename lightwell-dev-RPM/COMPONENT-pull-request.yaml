@@ -36,14 +36,14 @@ spec:
     - name: self-ref-url
       value: "https://github.com/konflux-ci/rpmbuild-pipeline.git"
     - name: self-ref-revision
-      value: eea4e3cc59a3a4ebf65b344634b83797e1353f16
+      value: 300e65dfcfce6c225272f76a86e656e9080aec8e
   pipelineRef:
     resolver: git
     params:
       - name: url
         value: https://github.com/konflux-ci/rpmbuild-pipeline.git
       - name: revision
-        value: eea4e3cc59a3a4ebf65b344634b83797e1353f16
+        value: 300e65dfcfce6c225272f76a86e656e9080aec8e
       - name: pathInRepo
         value: pipeline/build-rpm-package.yaml
   taskRunTemplate:
